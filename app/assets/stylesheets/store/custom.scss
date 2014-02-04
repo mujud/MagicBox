@@ -1,0 +1,49 @@
+body {
+
+  background-color: #F7F7F7;
+  padding-top: 60px;
+
+  
+}
+#top-nav{
+height:60px;
+background-color: rgba(239, 239, 244, .8);
+-webkit-box-shadow:none;
+background-image: none;
+border-bottom: solid 1px #c4c4c4;
+
+}
+#logo{
+text-align:center;
+padding-top:5px;
+}
+#menu-button{
+  margin-top: 11px;
+  
+}
+.search-in-bar{
+  margin-top: 11px;
+}
+.search-options-bt, .search-submit-bt{
+  display: none;
+}
+#search-icon{
+  float: right;
+  color: #c4c4c4;
+  margin-top:-25px;
+  margin-right:10px;
+}
+#link-to-cart button{
+  background: white;  
+}
+#link-to-cart img{
+  float:left;
+  width: 17px;
+  margin-top: 12px;
+  margin-left: -5px;
+  
+}
+#bar-login-and-cart{
+  padding-top: 5px;
+  
+}

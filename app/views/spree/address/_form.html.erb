@@ -1,0 +1,157 @@
+<div id="info-wrapper">
+	<% address_id = address_type.chars.first %>
+  <h3>Etape 1: Nom et numero de Telephone</h3>
+  <p>A fin de vous envoye un SMS des que votre produit et livrer.</p>
+<div class="row">
+
+<div data-hook=<%="#{address_type}_inner" %> class="col-lg-5">
+
+
+  <p class="field" id=<%="#{address_id}firstname" %>>
+    <%= form.label :firstname, Spree.t(:first_name) %><span class="required">*</span><br />
+    <%= form.text_field :firstname, :class => 'required form-control' %>
+  </p>
+  <p class="field" id=<%="#{address_id}lastname" %>>
+    <%= form.label :lastname, Spree.t(:last_name) %><span class="required">*</span><br />
+    <%= form.text_field :lastname, :class => 'required form-control' %>
+  </p>
+  <% if Spree::Config[:company] %>
+    <p class="field" id=<%="#{address_id}company" %>>
+      <%= form.label :company, Spree.t(:company) %><br />sdffs
+      <%= form.hidden_field :company,  :value =>"not required"%>
+    </p>
+  <% end %>
+  <p class="field" id=<%="#{address_id}address1" %>>
+
+    <%= form.hidden_field :address1,  :value =>"not required" %>
+  </p>
+  <p class="field" id=<%="#{address_id}address2" %>>
+
+    <%= form.hidden_field :address2,  :value =>"not required" %>
+  </p>
+  <p class="field" id=<%="#{address_id}city" %>>
+
+    <%= form.hidden_field :city,  :value =>"not required"%>
+  </p>
+  <p class="field" id=<%="#{address_id}country" %>>
+
+       <%= form.hidden_field :country_id, :value =>"49" %>
+
+  </p>
+
+
+
+  <p class="field" id=<%="#{address_id}zipcode" %>>
+
+    <%= form.hidden_field :zipcode, :value =>"1" %>
+  </p>
+  <p class="field" id=<%="#{address_id}phone" %>>
+    <%= form.label :phone, Spree.t(:phone) %><span class="required">*</span><br />
+    <%= form.phone_field :phone, :class => 'required form-control' %>
+  </p>
+  <% if Spree::Config[:alternative_shipping_phone] %>
+    <p class="field" id=<%="#{address_id}altphone" %>>
+      <%= form.label :alternative_phone, Spree.t(:alternative_phone) %><br />
+      <%= form.phone_field :alternative_phone %>
+    </p>
+  <% end %>
+</div>
+</div>
+<h3>Etape 2: Choisir votre boite magic!</h3>
+<p>Nous avons distribuer des boite Magic au epicier et commercan de votre ville pour vous permettre d'acceder a vos produit le plus vite et le facilement possible'</p>
+ <style type="text/css">
+
+      #map-canvas { min-height: 400px;  }
+    </style>
+ <script type="text/javascript"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAJaS3OoAQrB6qMhxCL-YErV95igVMVR50&sensor=true">
+    </script>
+
+<div class="col-lg-4">
+	<h4>Rabat Ville</h5>
+		<p>MagicBox et seulement disponible a rabat afin de voir magicbox dans votre ville voter sur Facebook</p>
+		<ul>
+			<li id="agdal">Agdal</li>
+			<li>hassane</li>
+			<li>Medina</li>
+		</ul>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->	
+</div>    
+<div id="map-canvas" class="col-lg-8"/>
+
+
+</div>
+    <script type="text/javascript">
+      function initialize() {
+       //var image = '/assets/store/logo.png';
+       var image = {
+    url: '/assets/store/logo.png',
+    // This marker is 20 pixels wide by 32 pixels tall.
+    scaledSize: new google.maps.Size(20, 23)
+
+  };
+        var mapOptions = {
+          center: new google.maps.LatLng(34.015049, -6.832720),
+          zoom: 17
+        };
+        var map = new google.maps.Map(document.getElementById("map-canvas"),
+            mapOptions);
+       var marker = new google.maps.Marker({
+    position: map.getCenter(),
+    map: map,
+    title: 'Click to zoom',
+    icon: image
+  });
+
+
+ var contentString = '<div id="content">'+
+      '<div id="siteNotice">'+
+      '</div>'+
+      '<h1 id="firstHeading" class="firstHeading">Uluru</h1>'+
+      '<div id="bodyContent">'+
+      '<p><b>Uluru</b>, also referred to as <b>Ayers Rock</b>, is a large ' +
+      'sandstone rock formation in the southern part of the '+
+      'Northern Territory, central Australia. It lies 335&#160;km (208&#160;mi) '+
+      'south west of the nearest large town, Alice Springs; 450&#160;km '+
+
+      '(last visited June 22, 2009).</p>'+
+      '</div>'+
+      '</div>';
+
+  var infowindow = new google.maps.InfoWindow({
+      content: contentString,
+      maxWidth: 200
+  });
+  
+    google.maps.event.addListener(marker, 'click', function() {
+
+    $('#myModal').modal('show');
+  });
+  
+    $("p").click(function() {
+      map.panTo(marker.getPosition());
+    });
+      }
+      google.maps.event.addDomListener(window, 'load', initialize);
+      
+
+
+       </script>

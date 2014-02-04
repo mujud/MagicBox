@@ -1,0 +1,32 @@
+<%= render :partial => 'spree/shared/error_messages', :locals => { :target => @user } %>
+<div id="inscription-titre" class="row">
+<h2>Pas besoin d'inscription!</h2>
+<h3>Pour vous envoyer vos produit il vous suffit de vous presenter</h3>
+</div>
+<div class="row">
+<div id="start-order" class="col-lg-4 col-lg-offset-4">
+
+<div id="registration" data-hook>
+	<div id="registration-avatar"><i class="fa fa-user"></i> </div>
+  <div id="account" class="columns alpha eight">
+    <!-- TODO: add partial with registration form -->
+  </div>
+  <% if Spree::Config[:allow_guest_checkout] %>
+    <div id="guest_checkout" data-hook class="col-lg-6 col-lg-offset-3">
+      <h6><%= Spree.t(:guest_user_account) %></h6>
+      <% if flash[:registration_error] %>
+        <div class='flash error'><%= flash[:registration_error] %></div>
+      <% end %>
+      <%= form_for @order, :url => update_checkout_registration_path, :method => :put, :html => { :id => 'checkout_form_registration' } do |f| %>
+        <p>
+          <%= f.email_field :email, :class => 'title' %>
+        </p>
+
+  
+        <p><%= f.submit Spree.t(:continue), :class => 'button primary' %></p>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+</div>
+</div>

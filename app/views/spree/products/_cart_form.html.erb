@@ -1,0 +1,70 @@
+<%= form_for :order, :url => populate_orders_path do |f| %>
+  <div id="inside-product-cart-form" data-hook="inside_product_cart_form" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+
+    <% if @product.variants_and_option_values(current_currency).any? %>
+      <div id="product-variants" class="columns five alpha">
+        <h6 class="product-section-title"><%= Spree.t(:variants) %></h6>
+        <ul>
+          <% @product.variants_and_option_values(current_currency).each_with_index do |variant, index| %>
+            <li>
+              <%= radio_button_tag "products[#{@product.id}]", variant.id, index == 0, 'data-price' => display_price(variant) %>
+              <label for="<%= ['products', @product.id, variant.id].join('_') %>">
+                <span class="variant-description">
+                  <%= variant_options variant %>
+                </span>
+                <% if variant_price variant %>
+                  <span class="price diff"><%= variant_price variant %></span>
+                <% end %>
+              </label>
+            </li>
+          <% end%>
+        </ul>
+      </div>
+    <% end%>
+
+    <% if @product.price_in(current_currency) and !@product.price.nil? %>
+      <div data-hook="product_price" class="columns five <% if !@product.has_variants? %> alpha <% else %> omega <% end %>">
+        
+        <div id="product-price">
+          <h6 class="product-section-title"><%= Spree.t(:price) %></h6>
+          <div>
+            <span class="price selling detail" itemprop="price">
+              <%= display_price(@product) %>
+            </span>
+            <span itemprop="priceCurrency" content="<%= @product.currency %>"></span>
+
+            <span class="price-original" itemprop="price">
+              <%= display_price(@product) %>
+            </span>
+            <span itemprop="priceCurrency" content="<%= @product.currency %>"></span>
+          </div>
+
+          <% if @product.master.in_stock? %>
+            <link itemprop="availability" href="http://schema.org/InStock" />
+          <% end %> 
+        </div>
+<h4 class="ok-to-ask">Pour recevoirse produits il vous sufit de:</h4>
+<div class="livraison-info detail"><i class="fa fa-bullseye"></i> Localise la <span>Boite Magic </span>la plus proche.</div>
+<div class="livraison-info detail"><i class="fa fa-truck fa-flip-horizontal"></i> Livraison <span>le meme jour.</span></div>
+<div class="livraison-info detail"><i class="fa fa-check-square"></i> Paye le marchant a la reception du produits comme vous le fesier avant!</div>
+<h4 class="never-ask">Nous ne vous demanderons jamais:</h4>
+<div class="livraison-info detail-no "><i class="fa fa-credit-card"></i> De nous donner vos information banquaire.</div>
+<div class="livraison-info detail-no"><i class="fa fa-truck fa-flip-horizontal"></i> De payer pour la livraison</div>
+<div class="livraison-info detail-no"><i class="fa fa-check-square"></i> De nous Donner votre adresse personnel</div>
+<h4 class="never-ask">Afin commerncer:</h4>
+        <div class="add-to-cart">
+          <%= number_field_tag (@product.variants_and_option_values.any? ? :quantity : "variants[#{@product.master.id}]"),
+            1, :class => 'title', :min => 1 %>
+          <%= button_tag :class => 'large primary btn btn-lg btn-primary btn-block', :id => 'add-to-cart-button', :type => :submit do %>
+            <%= "Ajouter au Panier"%>
+          <% end %>
+        </div>
+      </div>
+    <% else %>
+        <div id="product-price">
+          <br>
+          <div><span class="price selling" itemprop="price"><%= Spree.t('product_not_available_in_this_currency') %></span></div>
+        </div>
+    <% end %>    
+  </div>
+<% end %>

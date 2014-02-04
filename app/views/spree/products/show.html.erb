@@ -1,0 +1,53 @@
+<div data-hook="product_show" itemscope itemtype="http://schema.org/Product" id="product-view" class="row">
+  <% @body_id = 'product-details' %>
+
+  <div  data-hook="product_left_part" class="col-lg-5">
+    <div data-hook="product_left_part_wrap" class="row">
+
+      <div id="product-images" data-hook="product_images">
+        <div id="thumbnails" class="small-imges" data-hook>
+          <%= render :partial => 'thumbnails' %>
+        </div>
+        <div id="main-image" class="big-image" data-hook>
+          <%= render :partial => 'image' %>
+        </div>
+      </div>
+
+
+
+    </div>
+  </div>
+
+  <div class="col-lg-7" data-hook="product_right_part">
+    <div class="row" data-hook="product_right_part_wrap">
+
+      <div id="product-description" data-hook="product_description">
+
+        <h1 class="product-title" itemprop="name"><%= accurate_title %></h1>
+		<h4 class="sku-code">Sku number: 234-2321</h1>
+       
+        
+        <div id="cart-form" data-hook="cart_form">
+          <%= render :partial => 'cart_form' %>
+        </div>
+      
+
+     
+      </div>
+
+      <%= render :partial => 'taxons' %>
+
+    </div>
+    
+  </div>
+   <div data-hook="product_properties">
+        <%= render :partial => 'properties' %>
+      </div>
+
+      <div data-hook="promotions">
+        <%= render :partial => 'promotions' %>
+      </div>
+ <div itemprop="description" data-hook="description">
+          <%= product_description(@product) rescue Spree.t(:product_has_no_description) %>
+        </div>
+</div>

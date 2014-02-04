@@ -1,0 +1,58 @@
+<%
+  paginated_products = @searcher.retrieve_products if params.key?(:keywords)
+  paginated_products ||= products
+%>
+
+<% content_for :head do %>
+  <% if paginated_products.respond_to?(:num_pages) %>
+    <%= rel_next_prev_link_tags paginated_products %>
+  <% end %>
+<% end %>
+
+<% if products.empty? %>
+  <%= Spree.t(:no_products_found) %>
+<% elsif params.key?(:keywords) %>
+  <h6 class="search-results-title"><%= Spree.t(:search_results, :keywords => h(params[:keywords])) %></h6>
+<% end %>
+
+<% if products.any? %><div class="row" >
+<ul id="products" data-hook>
+  <% products.each do |product| %>
+    <li id="product_<%= product.id %>" class="product_itself <%= cycle("alpha", "secondary", "", "omega secondary", :name => "classes") %>" data-hook="products_list_item" itemscope itemtype="http://schema.org/Product">
+	<div class="product_wraper">
+      <div class="product-image">
+        <%= link_to product_image(product, :itemprop => "image"), product, :itemprop => 'url' %>
+      </div>
+    <div class="item_details_in_list">
+      
+      <%= link_to truncate(product.name, :length => 50), product, :class => 'info', :itemprop => "name", :title => product.name %>
+
+      <div>
+      <div class="pricing-in-list">
+      <span class="original-price" itemprop="price"><%= display_price(product) %></span>
+      
+      
+      <span class="price selling" itemprop="price"><%= display_price(product) %></span>
+	  </div>
+      </div>
+    </div>
+        <div class="livraison-info"><i class="fa fa-truck fa-flip-horizontal"></i> Livraison <span>le meme jour.</span></div>
+    <div class="item_options">
+     
+<button type="button" class="btn btn-sm brd"><i class="fa fa-comments-o"></i>commentaire</button>
+
+<button type="button" class="btn btn-sm"><i class="fa fa-share-square"></i>Details du produit</button>
+		</div>
+
+    </div>
+
+    </li>
+  <% end %>
+  <% reset_cycle("classes") %>
+</ul>
+</div>
+<% end %>
+
+<% if paginated_products.respond_to?(:num_pages) %>
+  <%= paginate paginated_products %>
+<% end %>

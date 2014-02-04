@@ -1,0 +1,86 @@
+<header id="header" class="row" data-hook>
+ <div id="top-nav"class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="row">
+	     <div class="col-lg-3"> 
+	      <div class="row">
+          <div class="col-lg-2">
+            <ul class="nav">
+              <li class="active">
+        
+                	<button type="button" id="menu-button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" ><i class="fa fa-bars fa-1g"></i></button>
+                	
+                
+
+                <ul class="dropdown-menu" role="menu">
+                    <li data-submenu-id="submenu-patas">
+                        <a href="#">Patas</a>
+                        <!--
+                          jQuery-menu-aim: each class="popover" div defines submenu content. There are a million
+                          and one ways to do this, places to structure the HTML, etc. This is just one example.
+                          jQuery-menu-aim is agnostic to your HTML structure, it only fires events to be used
+                          as you please.
+                        -->
+                        <div id="submenu-patas" class="popover">
+                            <h3 class="popover-title">Patas</h3>
+                            <div class="popover-content"><img src="/assets/store/patas.png"></div>
+                        </div>
+                    </li>
+                    <li data-submenu-id="submenu-snub-nosed">
+                        <a href="#">Golden Snub-Nosed</a>
+                        <div id="submenu-snub-nosed" class="popover">
+                            <h3 class="popover-title">Golden Snub-Nosed</h3>
+                            <div class="popover-content"><img src="/assets/store/snub-nosed.png"></div>
+                        </div>
+                    </li>
+                    <li data-submenu-id="submenu-duoc-langur">
+                        <a href="#">Duoc Langur</a>
+                        <div id="submenu-duoc-langur" class="popover">
+                            <h3 class="popover-title">Duoc Langur</h3>
+                            <div class="popover-content"><img src="/assets/store/duoc-langur.png"></div>
+                        </div>
+                    </li>
+                    <li data-submenu-id="submenu-pygmy">
+                        <a href="#">Baby Pygmy Marmoset</a>
+                        <div id="submenu-pygmy" class="popover">
+                            <h3 class="popover-title">Baby Pygmy Marmoset</h3>
+                            <div class="popover-content"><img src="/assets/store/pygmy.png"></div>
+                        </div>
+                    </li>
+                    <li data-submenu-id="submenu-tamarin">
+                        <a href="#">Black Lion Tamarin</a>
+                        <div id="submenu-tamarin" class="popover">
+                            <h3 class="popover-title">Black Lion Tamarin</h3>
+                            <div class="popover-content"><img src="img/tamarin.png"></div>
+                        </div>
+                    </li>
+                    <li data-submenu-id="submenu-monk">
+                        <a href="#">Monk Saki</a>
+                        <div id="submenu-monk" class="popover">
+                            <h3 class="popover-title">Monk Saki</h3>
+                            <div class="popover-content"><img src="img/monk.png"></div>
+                        </div>
+                    </li>
+                </ul>
+              </li>
+            </ul>
+          </div>	
+           
+          <div class="col-lg-8 search-in-bar"><%= render :partial => 'spree/shared/search' %></div>
+          </div></div>
+			
+		  <figure id="logo" class="col-lg-6"><%= logo %></figure>
+	      <div class="col-lg-3" id="bar-login-and-cart">
+	      		<div class="row">
+
+
+	      		<div class="col-lg-12">
+	      			  <%= render :partial => 'spree/shared/main_nav_bar' if store_menu? %>
+	      		</div>
+	      		</div>     	
+	      </div>
+		
+		</div>
+	   </div>
+  </div>
+</header>
